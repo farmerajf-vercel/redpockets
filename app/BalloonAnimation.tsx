@@ -66,7 +66,6 @@ const BalloonAnimation: React.FC = () => {
 
   // Winner logic: after 15s, chance increases with time
   function shouldWin(): boolean {
-    return true;
     if (winnerTriggered || !startTime) return false;
     const elapsed = (Date.now() - startTime) / 1000;
     if (elapsed < 15) return false;
