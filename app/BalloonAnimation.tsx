@@ -62,11 +62,11 @@ const BalloonAnimation: React.FC = () => {
             position: 'absolute',
             animationDuration: `${balloon.duration}s`,
             animationDelay: `${balloon.delay}s`,
-            pointerEvents: 'none',
             zIndex: 101,
             transform: 'translateX(-100%)'
           }}
           onAnimationEnd={() => handleAnimationEnd(balloon.id)}
+          onClick={() => handleAnimationEnd(balloon.id)}
         />
       ))}
     </div>
