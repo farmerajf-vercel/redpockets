@@ -2,13 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./BalloonAnimation.module.css";
 
-const BALLOON_COLORS = [
-  "#FF6B6B", // Red
-  "#FFD93D", // Yellow
-  "#6BCB77", // Green
-  "#4D96FF", // Blue
-  "#A66CFF"  // Purple
-];
 
 interface Balloon {
   id: number;

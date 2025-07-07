@@ -18,15 +18,7 @@
   pointer-events: auto;
 }
 
-.knot {
-  width: 10px;
-  height: 12px;
-  background: #444;
-  border-radius: 50% 50% 70% 70% / 60% 60% 100% 100%;
-  margin-bottom: -8px;
-  margin-top: -2px;
-  z-index: 2;
-}
+
 
 @keyframes floatUp {
   0% {
