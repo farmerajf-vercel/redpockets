@@ -26,7 +26,7 @@ const createBalloon = (id: number): Balloon => ({
   id,
   left: getRandom(0, 90),
   size: getRandom(60, 200),
-  duration: getRandom(4, 8),
+  duration: getRandom(2, 4),
   delay: getRandom(0, 2),
   color: balloonColors[Math.floor(Math.random() * balloonColors.length)]
 });
