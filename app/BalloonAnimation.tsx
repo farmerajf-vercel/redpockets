@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./BalloonAnimation.module.css";
+import Confetti, { ConfettiBurst } from "./Confetti";
 
 
 interface Balloon {
@@ -23,7 +24,9 @@ const createBalloon = (id: number): Balloon => ({
 
 const BalloonAnimation: React.FC = () => {
   const [balloons, setBalloons] = useState<Balloon[]>([]);
+  const [confettiBursts, setConfettiBursts] = useState<ConfettiBurst[]>([]);
   const balloonId = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,8 +43,23 @@ const BalloonAnimation: React.FC = () => {
     setBalloons((prev) => prev.filter((b) => b.id !== id));
   };
 
+  const handleBalloonPop = (id: number, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    // Remove the balloon
+    setBalloons((prev) => prev.filter((b) => b.id !== id));
+    // Get the position of the click relative to the viewport
+    const rect = (e.target as HTMLImageElement).getBoundingClientRect();
+    setConfettiBursts([
+      {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+        key: Date.now() + Math.random()
+      }
+    ]);
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
+      <Confetti bursts={confettiBursts} />
       {balloons.map((balloon) => (
         <img
           key={balloon.id}
@@ -59,7 +77,7 @@ const BalloonAnimation: React.FC = () => {
             transform: 'translateX(-100%)'
           }}
           onAnimationEnd={() => handleAnimationEnd(balloon.id)}
-          onClick={() => handleAnimationEnd(balloon.id)}
+          onClick={(e) => handleBalloonPop(balloon.id, e)}
         />
       ))}
     </div>
