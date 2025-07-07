@@ -10,16 +10,25 @@ interface Balloon {
   size: number; // px
   duration: number; // seconds
   delay: number; // seconds
+  color: 'red' | 'green' | 'blue';
 }
 
 const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
+
+const balloonColors = ['red', 'green', 'blue'] as const;
+const balloonFilters: Record<'red' | 'green' | 'blue', string> = {
+  red: 'none',
+  green: 'hue-rotate(90deg) saturate(1.2)',
+  blue: 'hue-rotate(200deg) saturate(1.4)'
+};
 
 const createBalloon = (id: number): Balloon => ({
   id,
   left: getRandom(0, 90),
   size: getRandom(60, 200),
   duration: getRandom(4, 8),
-  delay: getRandom(0, 2)
+  delay: getRandom(0, 2),
+  color: balloonColors[Math.floor(Math.random() * balloonColors.length)]
 });
 
 const BalloonAnimation: React.FC = () => {
@@ -74,7 +83,8 @@ const BalloonAnimation: React.FC = () => {
             animationDuration: `${balloon.duration}s`,
             animationDelay: `${balloon.delay}s`,
             zIndex: 101,
-            transform: 'translateX(-100%)'
+            transform: 'translateX(-100%)',
+            filter: balloonFilters[balloon.color]
           }}
           onAnimationEnd={() => handleAnimationEnd(balloon.id)}
           onClick={(e) => handleBalloonPop(balloon.id, e)}
