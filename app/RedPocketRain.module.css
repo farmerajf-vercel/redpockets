@@ -1,0 +1,30 @@
+.rainContainer {
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1200;
+  overflow: hidden;
+}
+
+.pocket {
+  position: absolute;
+  top: -80px;
+  animation-name: redpocket-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes redpocket-fall {
+  0% {
+    transform: translateY(0) rotate(-10deg) scale(1);
+  }
+  80% {
+    transform: translateY(80vh) rotate(10deg) scale(1.1);
+  }
+  100% {
+    transform: translateY(105vh) rotate(24deg) scale(1.05);
+  }
+}

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./BalloonAnimation.module.css";
 import Confetti, { ConfettiBurst } from "./Confetti";
 import RedPocketBurst from "./RedPocketBurst";
+import Winner from "./Winner";
 
 
 interface Balloon {
@@ -65,6 +66,7 @@ const BalloonAnimation: React.FC = () => {
 
   // Winner logic: after 15s, chance increases with time
   function shouldWin(): boolean {
+    return true;
     if (winnerTriggered || !startTime) return false;
     const elapsed = (Date.now() - startTime) / 1000;
     if (elapsed < 15) return false;
@@ -99,6 +101,7 @@ const BalloonAnimation: React.FC = () => {
 
   return (
     <div className={styles.container} ref={containerRef}>
+      <Winner visible={winnerTriggered} />
       {!winnerTriggered && <Confetti bursts={confettiBursts} />}
       {winnerTriggered && redPocketBursts.map((burst) => (
         <RedPocketBurst key={burst.key} x={burst.x} y={burst.y} />
