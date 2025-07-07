@@ -34,7 +34,7 @@ const BalloonAnimation: React.FC = () => {
         ...prev,
         createBalloon(balloonId.current++)
       ]);
-    }, 700);
+    }, 300);
     return () => clearInterval(interval);
   }, []);
 
