@@ -34,6 +34,7 @@ const createBalloon = (id: number): Balloon => ({
 });
 
 import type { WinEvent } from "./WinEventsContext";
+import { useWinEvents } from "./WinEventsContext";
 
 interface BalloonAnimationProps {
   gameStarted: boolean;
@@ -41,6 +42,7 @@ interface BalloonAnimationProps {
 }
 
 const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, currentWinEvent }) => {
+  const { markEventWon } = useWinEvents();
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const [confettiBursts, setConfettiBursts] = useState<ConfettiBurst[]>([]);
   const [redPocketBursts, setRedPocketBursts] = useState<any[]>([]);
@@ -95,6 +97,7 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, curren
       setWinnerTriggered(true);
       setPrizeValue(currentWinEvent?.value ?? null);
       setRedPocketBursts([{ x: burstX, y: burstY, key: Date.now() + Math.random() }]);
+      if (currentWinEvent?.id) markEventWon(currentWinEvent.id);
     } else {
       setConfettiBursts([
         {

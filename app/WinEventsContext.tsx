@@ -12,6 +12,7 @@ interface WinEventsContextType {
   loading: boolean;
   error: string | null;
   refresh: () => void;
+  markEventWon: (id: number) => Promise<void>;
 }
 
 const WinEventsContext = createContext<WinEventsContextType | undefined>(undefined);
@@ -44,12 +45,27 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
       });
   };
 
+  const markEventWon = async (id: number) => {
+    // Mark the event as won and persist
+    const updated = events.map(ev => ev.id === id ? { ...ev, won: true } : ev);
+    setEvents(updated);
+    try {
+      await fetch("/api/winevents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated),
+      });
+    } catch (e) {
+      setError("Failed to persist win event");
+    }
+  };
+
   useEffect(() => {
     fetchEvents();
   }, []);
 
   return (
-    <WinEventsContext.Provider value={{ events, loading, error, refresh: fetchEvents }}>
+    <WinEventsContext.Provider value={{ events, loading, error, refresh: fetchEvents, markEventWon }}>
       {children}
     </WinEventsContext.Provider>
   );
