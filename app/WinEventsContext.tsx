@@ -28,7 +28,7 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchEvents = () => {
+  const fetchEvents = React.useCallback(() => {
     setLoading(true);
     fetch("/api/winevents")
       .then((res) => {
@@ -43,7 +43,7 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
         setError(err.message);
         setLoading(false);
       });
-  };
+  }, []);
 
   const markEventWon = async (id: number) => {
     // Mark the event as won and persist

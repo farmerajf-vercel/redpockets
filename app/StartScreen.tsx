@@ -12,11 +12,13 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
   const { events, loading, error, refresh } = useWinEvents();
 
   React.useEffect(() => {
-    if (show && refresh) {
+    if (show) {
       refresh();
     }
     // No interval, just refresh once on show/redraw
-  }, [show, refresh]);
+    // intentionally omitting refresh from deps to avoid loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show]);
 
   if (!show) return null;
   // Get previous win events
