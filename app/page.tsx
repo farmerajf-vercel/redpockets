@@ -1,7 +1,5 @@
-// BalloonWrapper.tsx (client component)
-// This file should be created in the same directory
+export const dynamic = "force-dynamic";
 
-// page.tsx (server component)
 import BalloonWrapper from "./BalloonWrapper";
 
 export default function Home() {
