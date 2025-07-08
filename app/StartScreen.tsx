@@ -12,10 +12,12 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
   const { events, loading, error, refresh } = useWinEvents();
 
   React.useEffect(() => {
-    if (show) {
+    if (!show) return;
+    refresh(); // refresh immediately on show/redraw
+    const interval = setInterval(() => {
       refresh();
-    }
-    // No interval, just refresh once on show/redraw
+    }, 3000);
+    return () => clearInterval(interval);
     // intentionally omitting refresh from deps to avoid loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
@@ -30,7 +32,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
         <img src="/redpocket.png" alt="Red Pocket" className={styles.redPocketImage} />
         <h1 className={styles.title}>Find a Red Pocket</h1>
         <p>Pop the balloons to win a red pocket!</p>
-        {!loading && !error && (() => {
+        {(() => {
           const now = new Date().getTime();
           const available = events.find(ev => !ev.won && new Date(ev.earliestWin).getTime() <= now);
           if (available) {
