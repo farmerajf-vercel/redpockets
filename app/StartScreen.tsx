@@ -12,11 +12,10 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
   const { events, loading, error, refresh } = useWinEvents();
 
   React.useEffect(() => {
-    if (!show) return;
-    const interval = setInterval(() => {
-      if (refresh) refresh();
-    }, 1000);
-    return () => clearInterval(interval);
+    if (show && refresh) {
+      refresh();
+    }
+    // No interval, just refresh once on show/redraw
   }, [show, refresh]);
 
   if (!show) return null;
