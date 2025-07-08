@@ -9,7 +9,6 @@ let winEvents = [
 
 export async function GET() {
   // In production, fetch from DB here
-  console.log(">>>>", winEvents);
   return NextResponse.json(winEvents);
 }
 

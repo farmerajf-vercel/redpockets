@@ -18,7 +18,7 @@ const Winner: React.FC<WinnerProps> = ({ visible, value }) => {
       const timer = setTimeout(() => {
         setCoinSrc("/coin.png");
         setShowPrize(true);
-      }, 5000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [visible]);

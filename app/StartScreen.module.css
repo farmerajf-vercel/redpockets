@@ -7,9 +7,60 @@
   display: inline-block;
   background: rgba(28, 28, 30, 0.8);
   z-index: 1000;
-  padding-top: 5rem;
   font-size: 3rem;
   font-family: "Bebas Neue", sans-serif;
+}
+
+.prevWinsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 2.2rem;
+}
+
+.prevWinsTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #b78000;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.prevWinsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+.prevWinValue {
+  background: #ffe4e1;
+  color: #b78000;
+  font-weight: bold;
+  font-size: 1.6rem;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.1rem;
+  margin: 0.1rem 0.2rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prevWinPocket {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.noPrevWins {
+  color: #aaa;
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 .redPocketImage {

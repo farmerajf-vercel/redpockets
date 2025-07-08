@@ -12,6 +12,9 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
   const { events, loading, error } = useWinEvents();
 
   if (!show) return null;
+  // Get previous win events
+  const previousWins = events.filter(ev => ev.won);
+
   return (
     <div className={styles.overlay} style={{ zIndex: 1000 }}>
       <div style={{ padding: 40, textAlign: "center" }}>
@@ -34,13 +37,29 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
             // Find the soonest upcoming event
             const futureEvents = events.filter(ev => !ev.won && new Date(ev.earliestWin).getTime() > now);
             if (futureEvents.length === 0) {
-              return <div>No more plays available.</div>;
+              return <div style={{ color: '#ff0033', paddingTop: 8 }}>No more plays.</div>;
             }
             const next = futureEvents.reduce((min, ev) => new Date(ev.earliestWin).getTime() < new Date(min.earliestWin).getTime() ? ev : min, futureEvents[0]);
             const minutes = Math.ceil((new Date(next.earliestWin).getTime() - now) / 60000);
             return <div style={{ color: '#ff0033', paddingTop: 8 }}>Next play available in {minutes} minute{minutes !== 1 ? 's' : ''}.</div>;
           }
         })()}
+
+        <div className={styles.prevWinsSection}>
+          {previousWins.length > 0 && (
+            <>
+              <div className={styles.prevWinsTitle}>Previous wins</div>
+              <div className={styles.prevWinsRow}>
+                {previousWins.map(ev => (
+                  <span key={ev.id} className={styles.prevWinValue}>
+                    <img src="/redpocket.png" alt="Red Pocket" className={styles.prevWinPocket} />
+                    <span>${ev.value}</span>
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
 
       </div>
     </div>
