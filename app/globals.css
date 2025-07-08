@@ -20,7 +20,11 @@
 }
 
 body {
-  background: var(--background);
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 300%;
+
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
