@@ -3,18 +3,84 @@
       "id": 1,
       "value": 200,
       "won": false,
-      "earliestWin": "2025-07-08T16:00:00+10:00"
+      "earliestWin": "2025-07-09T08:00:00+10:00"
     },
     {
       "id": 2,
       "value": 100,
       "won": false,
-      "earliestWin": "2025-07-08T17:00:00+10:00"
+      "earliestWin": "2025-07-09T09:00:00+10:00"
     },
     {
       "id": 3,
+      "value": 300,
+      "won": false,
+      "earliestWin": "2025-07-09T10:00:00+10:00"
+    },
+    {
+      "id": 4,
       "value": 50,
       "won": false,
-      "earliestWin": "2025-07-08T18:00:00+10:00"
+      "earliestWin": "2025-07-09T11:00:00+10:00"
+    },
+    {
+      "id": 5,
+      "value": 100,
+      "won": false,
+      "earliestWin": "2025-07-09T12:00:00+10:00"
+    },
+    {
+      "id": 6,
+      "value": 50,
+      "won": false,
+      "earliestWin": "2025-07-09T13:00:00+10:00"
+    },
+    {
+      "id": 7,
+      "value": 10,
+      "won": false,
+      "earliestWin": "2025-07-09T14:00:00+10:00"
+    },
+    {
+      "id": 8,
+      "value": 1,
+      "won": false,
+      "earliestWin": "2025-07-09T15:00:00+10:00"
+    },
+    {
+      "id": 9,
+      "value": 200,
+      "won": false,
+      "earliestWin": "2025-07-09T16:00:00+10:00"
+    },
+    {
+      "id": 10,
+      "value": 99,
+      "won": false,
+      "earliestWin": "2025-07-09T17:00:00+10:00"
+    },
+    {
+      "id": 11,
+      "value": 300,
+      "won": false,
+      "earliestWin": "2025-07-09T18:00:00+10:00"
+    },
+    {
+      "id": 12,
+      "value": 40,
+      "won": false,
+      "earliestWin": "2025-07-09T19:00:00+10:00"
+    },
+    {
+      "id": 13,
+      "value": 50,
+      "won": false,
+      "earliestWin": "2025-07-09T20:00:00+10:00"
+    },
+    {
+      "id": 14,
+      "value": 500,
+      "won": false,
+      "earliestWin": "2025-07-09T21:00:00+10:00"
     }
   ]
