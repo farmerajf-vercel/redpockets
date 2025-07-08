@@ -34,9 +34,12 @@ const Winner: React.FC<WinnerProps> = ({ visible, value }) => {
         <img src={coinSrc} alt="Coin" />
       </div>
       {showPrize && (
-        <div className={styles.prize}>
-          ${value ?? 200}
-        </div>
+        <>
+          <div className={styles.prize}>
+            ${value}
+          </div>
+          <div className={styles.comeBack}>Come back later for another go</div>
+        </>
       )}
     </div>
   );

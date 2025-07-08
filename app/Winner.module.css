@@ -41,3 +41,13 @@
   letter-spacing: 0.1em;
   opacity: 1;
 }
+
+.comeBack {
+  font-family: "Bebas Neue", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  color: #eaee18;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.1em;
+  opacity: 1;
+}
