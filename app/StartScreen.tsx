@@ -24,7 +24,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
 
   return (
     <div className={styles.overlay} style={{ zIndex: 1000 }}>
-      <div style={{ padding: 40, textAlign: "center" }}>
+      <div style={{ padding: 10, textAlign: "center" }}>
         <img src="/redpocket.png" alt="Red Pocket" className={styles.redPocketImage} />
         <h1 className={styles.title}>Find a Red Pocket</h1>
         <p>Pop the balloons to win a red pocket!</p>
