@@ -1,0 +1,40 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+  background: rgba(28, 28, 30, 0.8);
+  z-index: 1000;
+  padding-top: 5rem;
+  font-size: 3rem;
+  font-family: "Bebas Neue", "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+.redPocketImage {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  padding: 16px 0;
+}
+
+.button {
+    color: rgb(29, 29, 29);
+  margin-top: 32px;
+  font-size: 24px;
+  padding: 16px 40px;
+  cursor: pointer;
+  background-color: #ffc800;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #ffd700;
+}
