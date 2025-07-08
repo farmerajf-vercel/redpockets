@@ -4,9 +4,10 @@ import RedPocketRain from "./RedPocketRain";
 
 interface WinnerProps {
   visible: boolean;
+  value?: number | null;
 }
 
-const Winner: React.FC<WinnerProps> = ({ visible }) => {
+const Winner: React.FC<WinnerProps> = ({ visible, value }) => {
   const [showPrize, setShowPrize] = useState(false);
   const [coinSrc, setCoinSrc] = useState("/coinspin.gif");
 
@@ -34,7 +35,7 @@ const Winner: React.FC<WinnerProps> = ({ visible }) => {
       </div>
       {showPrize && (
         <div className={styles.prize}>
-          $200
+          ${value ?? 200}
         </div>
       )}
     </div>

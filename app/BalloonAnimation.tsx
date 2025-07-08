@@ -33,15 +33,19 @@ const createBalloon = (id: number): Balloon => ({
   color: balloonColors[Math.floor(Math.random() * balloonColors.length)]
 });
 
+import type { WinEvent } from "./WinEventsContext";
+
 interface BalloonAnimationProps {
   gameStarted: boolean;
+  currentWinEvent: WinEvent | null;
 }
 
-const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted }) => {
+const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, currentWinEvent }) => {
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const [confettiBursts, setConfettiBursts] = useState<ConfettiBurst[]>([]);
   const [redPocketBursts, setRedPocketBursts] = useState<any[]>([]);
   const [winnerTriggered, setWinnerTriggered] = useState(false);
+  const [prizeValue, setPrizeValue] = useState<number | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
   const balloonId = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -89,6 +93,7 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted }) => {
     const burstY = rect.top + rect.height / 2;
     if (shouldWin()) {
       setWinnerTriggered(true);
+      setPrizeValue(currentWinEvent?.value ?? null);
       setRedPocketBursts([{ x: burstX, y: burstY, key: Date.now() + Math.random() }]);
     } else {
       setConfettiBursts([
@@ -106,7 +111,7 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted }) => {
   if (!gameStarted) return null;
   return (
     <div className={styles.container} ref={containerRef}>
-      <Winner visible={winnerTriggered} />
+      <Winner visible={winnerTriggered} value={prizeValue} />
       {!winnerTriggered && <Confetti bursts={confettiBursts} />}
       {winnerTriggered && redPocketBursts.map((burst) => (
         <RedPocketBurst key={burst.key} x={burst.x} y={burst.y} />

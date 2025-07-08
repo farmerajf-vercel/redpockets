@@ -6,35 +6,10 @@ interface StartScreenProps {
   show: boolean;
 }
 
-interface WinEvent {
-  id: number;
-  value: number;
-  won: boolean;
-  earliestWin: string;
-}
+import { useWinEvents } from "./WinEventsContext";
 
 const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
-  const [events, setEvents] = useState<WinEvent[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!show) return;
-    setLoading(true);
-    fetch("/api/winevents")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch win events");
-        return res.json();
-      })
-      .then((data) => {
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [show]);
+  const { events, loading, error } = useWinEvents();
 
   if (!show) return null;
   return (
