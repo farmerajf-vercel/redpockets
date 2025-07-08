@@ -52,6 +52,33 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, curren
   const balloonId = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Song audio ref
+  const songAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Play song.mp3 when game starts, stop on win
+  useEffect(() => {
+    if (gameStarted && !winnerTriggered) {
+      if (!songAudioRef.current) {
+        songAudioRef.current = new Audio('/song.mp3');
+        songAudioRef.current.loop = true;
+      }
+      songAudioRef.current.currentTime = 0;
+      songAudioRef.current.play().catch(() => {});
+    } else {
+      if (songAudioRef.current) {
+        songAudioRef.current.pause();
+        songAudioRef.current.currentTime = 0;
+      }
+    }
+    // Stop song on unmount
+    return () => {
+      if (songAudioRef.current) {
+        songAudioRef.current.pause();
+        songAudioRef.current.currentTime = 0;
+      }
+    };
+  }, [gameStarted, winnerTriggered]);
+
   // Timer start
   useEffect(() => {
     if (gameStarted && startTime === null) setStartTime(Date.now());
@@ -87,6 +114,14 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, curren
 
   const handleBalloonPop = (id: number, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     if (winnerTriggered) return;
+    // Play pop sound
+    try {
+      const popAudio = new Audio('/pop.mp3');
+      popAudio.currentTime = 0;
+      popAudio.play();
+    } catch (err) {
+      // ignore audio errors
+    }
     // Remove the balloon
     setBalloons((prev) => prev.filter((b) => b.id !== id));
     // Get the position of the click relative to the viewport
@@ -94,6 +129,14 @@ const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted, curren
     const burstX = rect.left + rect.width / 2;
     const burstY = rect.top + rect.height / 2;
     if (shouldWin()) {
+      // Play yay sound for winning balloon
+      try {
+        const yayAudio = new Audio('/yay.mp3');
+        yayAudio.currentTime = 0;
+        yayAudio.play();
+      } catch (err) {
+        // ignore audio errors
+      }
       setWinnerTriggered(true);
       setPrizeValue(currentWinEvent?.value ?? null);
       setRedPocketBursts([{ x: burstX, y: burstY, key: Date.now() + Math.random() }]);
