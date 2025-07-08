@@ -24,7 +24,18 @@ export function useWinEvents() {
 }
 
 export function WinEventsProvider({ children }: { children: ReactNode }) {
-  const [events, setEvents] = useState<WinEvent[]>([]);
+  const [events, setEvents] = useState<WinEvent[]>(() => {
+    // Try to load from localStorage first
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('winevents');
+      if (cached) {
+        try {
+          return JSON.parse(cached);
+        } catch (e) {}
+      }
+    }
+    return [];
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,6 +48,10 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
       })
       .then((data) => {
         setEvents(data);
+        // Update localStorage cache
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('winevents', JSON.stringify(data));
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -49,6 +64,10 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
     // Mark the event as won and persist
     const updated = events.map(ev => ev.id === id ? { ...ev, won: true } : ev);
     setEvents(updated);
+    // Update localStorage cache
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('winevents', JSON.stringify(updated));
+    }
     try {
       await fetch("/api/winevents", {
         method: "POST",

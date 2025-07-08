@@ -14,10 +14,6 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, show }) => {
   React.useEffect(() => {
     if (!show) return;
     refresh(); // refresh immediately on show/redraw
-    // const interval = setInterval(() => {
-    //   refresh();
-    // }, 3000);
-    // return () => clearInterval(interval);
     // intentionally omitting refresh from deps to avoid loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
