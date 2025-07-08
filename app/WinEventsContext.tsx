@@ -41,6 +41,18 @@ export function WinEventsProvider({ children }: { children: ReactNode }) {
 
   const fetchEvents = React.useCallback(() => {
     setLoading(true);
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('winevents');
+      if (cached) {
+        try {
+          setEvents(JSON.parse(cached));
+          setLoading(false);
+          return;
+        } catch (e) {
+          // If cache is corrupted, fallback to backend
+        }
+      }
+    }
     fetch("/api/winevents")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch win events");
