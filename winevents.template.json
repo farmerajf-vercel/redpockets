@@ -1,0 +1,20 @@
+  [
+    {
+      "id": 1,
+      "value": 200,
+      "won": false,
+      "earliestWin": "2025-07-08T13:00:00+10:00"
+    },
+    {
+      "id": 2,
+      "value": 100,
+      "won": false,
+      "earliestWin": "2025-07-08T14:00:00+10:00"
+    },
+    {
+      "id": 3,
+      "value": 50,
+      "won": false,
+      "earliestWin": "2025-07-08T15:00:00+10:00"
+    }
+  ]
