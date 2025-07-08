@@ -33,7 +33,11 @@ const createBalloon = (id: number): Balloon => ({
   color: balloonColors[Math.floor(Math.random() * balloonColors.length)]
 });
 
-const BalloonAnimation: React.FC = () => {
+interface BalloonAnimationProps {
+  gameStarted: boolean;
+}
+
+const BalloonAnimation: React.FC<BalloonAnimationProps> = ({ gameStarted }) => {
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const [confettiBursts, setConfettiBursts] = useState<ConfettiBurst[]>([]);
   const [redPocketBursts, setRedPocketBursts] = useState<any[]>([]);
@@ -44,12 +48,13 @@ const BalloonAnimation: React.FC = () => {
 
   // Timer start
   useEffect(() => {
-    if (startTime === null) setStartTime(Date.now());
-  }, [startTime]);
+    if (gameStarted && startTime === null) setStartTime(Date.now());
+    if (!gameStarted) setStartTime(null);
+  }, [gameStarted, startTime]);
 
   // Balloon generation interval
   useEffect(() => {
-    if (winnerTriggered) return; // Stop spawning on win
+    if (!gameStarted || winnerTriggered) return; // Only spawn when game started and not won
     const interval = setInterval(() => {
       setBalloons((prev) => [
         ...prev,
@@ -57,7 +62,7 @@ const BalloonAnimation: React.FC = () => {
       ]);
     }, 300);
     return () => clearInterval(interval);
-  }, [winnerTriggered]);
+  }, [gameStarted, winnerTriggered]);
 
   // Clean up balloons that have floated out
   const handleAnimationEnd = (id: number) => {
@@ -66,6 +71,7 @@ const BalloonAnimation: React.FC = () => {
 
   // Winner logic: after 15s, chance increases with time
   function shouldWin(): boolean {
+    return true;
     if (winnerTriggered || !startTime) return false;
     const elapsed = (Date.now() - startTime) / 1000;
     if (elapsed < 15) return false;
@@ -98,6 +104,7 @@ const BalloonAnimation: React.FC = () => {
 
 
 
+  if (!gameStarted) return null;
   return (
     <div className={styles.container} ref={containerRef}>
       <Winner visible={winnerTriggered} />

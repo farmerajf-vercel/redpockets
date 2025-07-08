@@ -26,7 +26,9 @@ const Winner: React.FC<WinnerProps> = ({ visible }) => {
   return (
     <div className={styles.overlay}>
       {showPrize && <RedPocketRain />}
-      <div className={styles.text} style={{fontFamily: '"Playfair Display", serif'}}> Winner!</div>
+      <div className={styles.redpocket}>
+        <img src="/redpocket.png" alt="Rock Pocket" />
+      </div>
       <div className={styles.coin}>
         <img src={coinSrc} alt="Coin" />
       </div>
