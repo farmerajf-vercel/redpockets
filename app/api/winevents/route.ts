@@ -8,7 +8,16 @@ export async function GET() {
   const res = await fetch(url);
   const text = await res.text();
   const events = JSON.parse(text);
-  return NextResponse.json(events);
+  return new NextResponse(JSON.stringify(events), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+      'Surrogate-Control': 'no-store'
+    }
+  });
 }
 
 export async function POST(req: Request) {
